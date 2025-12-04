@@ -20,7 +20,7 @@ app.get("/", (req, res) => {
   res.send("Hello from TypeScript Express Server! API IS RUNNING!!!");
 });
 
-app.use("/user", userRouter);
+app.use("api/v1/user", userRouter);
 
 app.use(authorize);
 

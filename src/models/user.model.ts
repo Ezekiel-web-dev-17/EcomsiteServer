@@ -6,6 +6,8 @@ export interface UserDocSchema {
   email: string;
   password: string;
   isVerified: boolean;
+  emailSubscribed: boolean;
+  tokenVersion: number;
 }
 
 const userModel = new mongoose.Schema<UserDocSchema>(
@@ -38,6 +40,14 @@ const userModel = new mongoose.Schema<UserDocSchema>(
     isVerified: {
       type: Boolean,
       default: false,
+    },
+    emailSubscribed: {
+      type: Boolean,
+      default: true,
+    },
+    tokenVersion: {
+      type: Number,
+      default: 0,
     },
   },
   { timestamps: true }

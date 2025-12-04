@@ -30,11 +30,15 @@ const authorize = async (
     const user = await User.findById(decode.userId);
 
     if (!user)
-      return sendResponse(res, 401, {
-        success: false,
-        message: "Invalid token - user not found.",
-        error: "Error authorizing user: Invalid Token",
-      });
+      return sendResponse(
+        res,
+        401,
+        {
+          success: false,
+          message: "Invalid token - user not found.",
+        },
+        "Error authorizing user: Invalid Token"
+      );
 
     req.user = user;
 

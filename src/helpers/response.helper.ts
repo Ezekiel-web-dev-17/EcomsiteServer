@@ -4,22 +4,23 @@ interface OutputBody {
   success: boolean;
   message: string;
   data?: unknown;
-  error?: unknown;
 }
 
 export const sendResponse = (
   res: Response,
   status: number,
   body: OutputBody,
-  error?: unknown
+  error?: boolean | string | unknown
 ) => {
-  if (error || (!error && body.error)) {
+  if (error) {
     const err =
       error instanceof Error
         ? error.stack
-        : JSON.stringify(error ? error : body.error);
-    body["error"] = err;
-    console.error(err);
+        : JSON.stringify(
+            typeof error === "boolean" && error ? body.message : error
+          );
+
+    console.error(`Error: `, err);
   }
 
   return res.status(status).json(body);
